@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+nav {
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LOGO */
+nav .logo img {
+    width: 80px;
+}
+
+/* PESQUISA */
+.pesquisa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f0f0f0;
+    border-radius: 25px;
+    padding: 8px 15px;
+    width: 50%;
+}
+
+.pesquisa i {
+    color: #555;
+}
+
+.pesquisa input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 50%;
+    font-size: 14px;
+    color: #333;
+    transition: 0.3s ease-in-out;
+}
+
+/* NAVEGAÇÃO */
+.navegacao {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.navegacao li a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.navegacao li #perfil {
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+}
+
+.navegacao li a:hover {
+    color: red;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .pesquisa {
+        max-width: 100%;
+    }
+
+    .navegacao {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
