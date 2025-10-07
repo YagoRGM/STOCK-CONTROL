@@ -12,7 +12,7 @@
 <body>
     <nav>
         <div class="logo">
-            <img src="../img/Logo.png" alt="Logo">
+            <img src="../img/logo1.png" alt="Logo">
         </div>
 
         <div class="pesquisa">
@@ -21,6 +21,7 @@
         </div>
 
         <ul class="navegacao">
+            <li><a href="../php/inicio.php">Início</a></li>
             <li><a href="#">Gerenciar camisas</a></li>
             <li><a href="#">Movimentações</a></li>
             <li><a href="#">Usuários</a></li>
@@ -36,7 +37,6 @@
     btnModo.addEventListener("click", () => {
         body.classList.toggle("dark-mode");
 
-        // Troca o ícone entre lua e sol
         if (body.classList.contains("dark-mode")) {
             btnModo.classList.replace("fa-moon", "fa-sun");
         } else {

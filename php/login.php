@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["nome"] = $usuario["nome"];
             $_SESSION["tipo"] = $usuario["tipo"];
             $_SESSION["email"] = $usuario["email"];
-            $sucesso = true; // marca sucesso
+            $sucesso = true; 
         } else {
             $erro = "Senha incorreta!";
         }
