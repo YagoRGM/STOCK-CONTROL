@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #DA020E;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Links gerais */
+a {
+    color: #DA020E;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Container do form */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+/* Logo acima do form */
+.logo-container {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+}
+
+/* Formulário */
+form {
+    background-color: #fff;
+    padding: 60px 40px 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    width: 100%;
+}
+
+.voltar {
+    display: block;
+    text-align: left;
+    margin-bottom: 15px;
+    color: #DA020E;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.voltar i {
+    margin-right: 6px;
+}
+.voltar:hover {
+    color: #b0020c;
+    text-decoration: underline;
+}
+
+h2 {
+    text-align: center;
+    color: #DA020E;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 5px;
+    border: 2px solid #DA020E;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #DA020E;
+    outline: none;
+    transition: 0.2s;
+}
+
+input::placeholder {
+    color: #DA020E;
+    opacity: 0.7;
+}
+
+input:focus,
+select:focus {
+    box-shadow: 0 0 5px #DA020E;
+}
+
+label {
+    font-weight: 600;
+    color: #DA020E;
+    display: block;
+    text-align: left;
+    margin-top: 12px;
+}
+
+button {
+    width: 100%;
+    background-color: #DA020E;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    margin-top: 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+button:hover {
+    background-color: #b0020c;
+}
+
+.links-inline,
+.links-baixo {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.links-inline a,
+.links-baixo a {
+    text-decoration: none;
+    color: #DA020E;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.links-inline a:hover,
+.links-baixo a:hover,
+.opcoes:hover {
+    color: #b0020c;
+    text-decoration: underline;
+}
+
+.opcoes {
+    font-size: 16px;
+    display: block;
+    text-align: left;
+    margin-top: 6px;
+}
+
+.erro {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Mobile */
+@media (max-width: 500px) {
+    form {
+        padding: 50px 20px 30px;
+    }
+    h2 {
+        font-size: 22px;
+    }
+    input,
+    select,
+    button {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+    .logo-container {
+        width: 100px;
+        height: 100px;
+        top: -60px;
+    }
+}
+
+/* Tablets e desktops médios */
+@media (min-width: 501px) and (max-width: 800px) {
+    form {
+        padding: 60px 30px 40px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    input,
+    select,
+    button {
+        font-size: 16px;
+        padding: 12px 14px;
+    }
+}
+
+/* Desktop grande */
+@media (min-width: 801px) {
+    .container {
+        max-width: 500px;
+    }
+    form {
+        padding: 70px 50px 50px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    label {
+        font-size: 16px;
+    }
+    input,
+    select,
+    button {
+        font-size: 17px;
+        padding: 14px 16px;
+    }
+}
