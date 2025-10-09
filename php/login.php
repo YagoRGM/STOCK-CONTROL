@@ -2,14 +2,11 @@
 include('conexao.php');
 session_start();
 
-$sucesso = false;
-$erro = "";
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = trim($_POST["email_digitado"]);
-    $senha = trim($_POST["senha_digitado"]);
+    $email = $_POST["email_digitado"];
+    $senha = $_POST["senha_digitado"];
 
-    $sql = "SELECT * FROM usuarios WHERE email = ?";
+    $sql = "SELECT * FROM usuarios WHERE email_usuario = ?";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -17,17 +14,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($resultado->num_rows > 0) {
         $usuario = $resultado->fetch_assoc();
-        if (password_verify($senha, $usuario["senha"])) {
-            $_SESSION["id"] = $usuario["id"];
-            $_SESSION["nome"] = $usuario["nome"];
-            $_SESSION["tipo"] = $usuario["tipo"];
-            $_SESSION["email"] = $usuario["email"];
-            $sucesso = true; 
+        if (password_verify($senha, $usuario["senha_usuario"])) {
+            $_SESSION["id_usuario"] = $usuario["id_usuario"];
+            $_SESSION["nome_usuario"] = $usuario["nome_usuario"];
+            $_SESSION["email_usuario"] = $usuario["email_usuario"];
+            $_SESSION["tipo_usuario"] = $usuario["tipo_usuario"];
+            $sucesso = true;
         } else {
-            $erro = "Senha incorreta!";
+            $senha_incorreta = true;
         }
     } else {
-        $erro = "Usuário não encontrado!";
+        $usuario_nao_encontrado = true;
     }
 
     $stmt->close();
@@ -53,8 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <form method="POST" action="">
 
-            <h2>Login</h2>
-            <?php if (isset($erro)) echo "<p class='erro'>$erro</p>"; ?>
+            <h2>Entrar</h2>
 
             <label>Email:</label>
             <input type="email" name="email_digitado" required>
@@ -71,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         </form>
     </div>
-<?php if ($sucesso) : ?>
+    <?php if (isset($sucesso) && $sucesso) : ?>
         <script>
             Swal.fire({
                 icon: 'success',
@@ -82,15 +78,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 window.location.href = 'inicio.php';
             });
         </script>
-    <?php elseif ($erro) : ?>
+    <?php elseif (isset($senha_incorreta) && $senha_incorreta) : ?>
         <script>
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: '<?= $erro ?>',
+                text: 'Senha incorreta, tente novamente',
+                confirmButtonColor: '#DA020E'
+            });
+        </script>
+    <?php elseif (isset($usuario_nao_encontrado) && $usuario_nao_encontrado) : ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Usuário não encontrado!',
                 confirmButtonColor: '#DA020E'
             });
         </script>
     <?php endif; ?>
 </body>
+
 </html>

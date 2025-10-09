@@ -1,3 +1,34 @@
+<?php
+include_once('conexao.php');
+
+$id_usuario = $_SESSION['id_usuario'];
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['id_usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
+
+// Consulta o nome completo
+$stmt = $conexao->prepare("SELECT nome_usuario FROM usuarios WHERE id_usuario = ?");
+$stmt->bind_param("i", $id_usuario);
+$stmt->execute();
+$result = $stmt->get_result();
+$usuario_nav = $result->fetch_assoc();
+
+$nome_completo = $usuario_nav['nome_usuario'];
+
+// Gera as iniciais (ex: "Kaique Ferreira" → "KF")
+$partes = explode(' ', trim($nome_completo));
+$iniciais = '';
+foreach ($partes as $parte) {
+    if (!empty($parte)) {
+        $iniciais .= strtoupper($parte[0]);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -26,7 +57,7 @@
             <li><a href="#">Movimentações</a></li>
             <li><a href="#">Usuários</a></li>
             <li><i class="fa-solid fa-moon" id="modo-noturno"></i></li>
-            <li><a href="#" id="perfil">KF</a></li>
+            <li><a href="perfil.php" id="perfil"><?php echo htmlspecialchars($iniciais); ?></a></li>
         </ul>
     </nav>
 </body>

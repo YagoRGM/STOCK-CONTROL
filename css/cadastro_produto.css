@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+}
+
+
+.titulo h1 {
+    font-size: 40px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.form-produto {
+    margin-top: 40px;
+    width: 50%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-header {
+    background: #DA020E;
+    color: white;
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.inputbox {
+    margin-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+input[type="file"] {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+select {
+    cursor: pointer;
+}
+
+input[type="file"] {
+    border: 2px dashed #DA020E;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    color: #DA020E;
+    font-weight: 500;
+}
+
+input[type="file"]::file-selector-button {
+    display: none;
+}
+
+.btn-adicionar {
+    background: #DA020E;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.btn-adicionar:hover {
+    background: #b00109;
+}

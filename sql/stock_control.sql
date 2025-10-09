@@ -1,44 +1,98 @@
 -- phpMyAdmin SQL Dump
--- versão 5.2.1
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
 -- Host: 127.0.0.1
--- Geração: 07/10/2025
+-- Tempo de geração: 09-Out-2025 às 21:21
+-- Versão do servidor: 10.4.27-MariaDB
+-- versão do PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
--- Cria o banco de dados se não existir
+--
+-- Banco de dados: `stock_control`
+--
 CREATE DATABASE IF NOT EXISTS `stock_control` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
--- Seleciona o banco de dados
 USE `stock_control`;
 
 -- --------------------------------------------------------
--- Estrutura para tabela `usuarios`
--- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `senha` varchar(255) NOT NULL,
-  `tipo` enum('admin','funcionario') DEFAULT 'funcionario',
-  PRIMARY KEY (`id`)
+--
+-- Estrutura da tabela `produtos`
+--
+
+CREATE TABLE `produtos` (
+  `id_produto` int(11) NOT NULL,
+  `nome_produto` varchar(255) NOT NULL,
+  `descricao_produto` varchar(255) NOT NULL,
+  `quantidade_produto` int(11) NOT NULL,
+  `preco_produto` float NOT NULL,
+  `status_produto` enum('Ativo','Inativo') NOT NULL,
+  `imagem_produto` longblob NOT NULL,
+  `data_criacao_produto` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
--- Inserindo dados na tabela `usuarios`
--- --------------------------------------------------------
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo`) VALUES
-(1, 'Yagao', 'yago@gmail.com', '$2y$10$qZ4CgnSEm9ovV.7echwEpeE3.ItktI0aJkKvAF5LD.Smts/F2lQaG', 'admin'),
-(2, 'Cleiton', 'cleiton@gmail.com', '$2y$10$LKaq/dqdtXW/.9Ve5LHV4.j4gUPNakm/HKmPx.Ucm12o.ZTvInOlG', 'funcionario');
+--
+-- Estrutura da tabela `usuarios`
+--
 
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL,
+  `nome_usuario` varchar(100) NOT NULL,
+  `email_usuario` varchar(100) NOT NULL,
+  `senha_usuario` varchar(255) NOT NULL,
+  `tipo_usuario` enum('Administrador','Funcionario') DEFAULT 'Funcionario'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nome_usuario`, `email_usuario`, `senha_usuario`, `tipo_usuario`) VALUES
+(1, 'Yago Moraes', 'yago@gmail.com', '$2y$10$qZ4CgnSEm9ovV.7echwEpeE3.ItktI0aJkKvAF5LD.Smts/F2lQaG', 'Administrador'),
+(2, 'Cleiton', 'cleiton@gmail.com', '$2y$10$LKaq/dqdtXW/.9Ve5LHV4.j4gUPNakm/HKmPx.Ucm12o.ZTvInOlG', 'Funcionario');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `produtos`
+--
+ALTER TABLE `produtos`
+  ADD PRIMARY KEY (`id_produto`);
+
+--
+-- Índices para tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

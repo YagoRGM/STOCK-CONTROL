@@ -1,106 +1,121 @@
 <?php
 include('conexao.php');
 session_start();
+$id_usuario = $_SESSION['id_usuario'];
 
-if (!isset($_SESSION["id"])) {
+// Verifica se o usuário está logado corretamente
+if (!isset($_SESSION["id_usuario"])) {
     header("Location: login.php");
     exit;
 }
 
-$id_usuario = $_SESSION["id"];
 
-$sql = "SELECT id, nome, email, senha, tipo FROM usuarios WHERE id = ?";
-$stmt = $conexao->prepare($sql);
+// Busca os dados atuais do usuário
+$stmt = $conexao->prepare("SELECT nome_usuario, email_usuario, senha_usuario FROM usuarios WHERE id_usuario = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
 $result = $stmt->get_result();
 $usuario = $result->fetch_assoc();
 
+// Atualização do perfil
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nome = $_POST["nome"];
     $email = $_POST["email"];
-    $tipo = $_POST["tipo"]; 
+    $senha_atual = $_POST["senha_atual"];
+    $nova_senha = $_POST["nova_senha"];
 
-    if (!empty($_POST["senha"])) {
-        $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
-        $update = $conexao->prepare("UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?");
-        $update->bind_param("sssi", $nome, $email, $senha, $id_usuario);
-    } else {
-        $update = $conexao->prepare("UPDATE usuarios SET nome = ?, email = ? WHERE id = ?");
-        $update->bind_param("ssi", $nome, $email, $id_usuario);
+    // Atualiza nome e email sempre
+    $update_query = "UPDATE usuarios SET nome_usuario = ?, email_usuario = ? WHERE id_usuario = ?";
+    $update_stmt = $conexao->prepare($update_query);
+    $update_stmt->bind_param("ssi", $nome, $email, $id_usuario);
+    $update_stmt->execute();
+
+    // Se quiser alterar a senha
+    if (!empty($senha_atual) && !empty($nova_senha)) {
+        if (password_verify($senha_atual, $usuario["senha_usuario"])) {
+            $nova_senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
+            $update_senha = $conexao->prepare("UPDATE usuarios SET senha_usuario = ? WHERE id_usuario = ?");
+            $update_senha->bind_param("si", $nova_senha_hash, $id_usuario);
+            $update_senha->execute();
+            echo "<script>alert('Senha atualizada com sucesso!');</script>";
+        } else {
+            echo "<script>alert('Senha atual incorreta.');</script>";
+        }
     }
 
-    $update->execute();
+    // 🔥 Atualiza as informações na sessão
+    $_SESSION["nome_usuario"] = $nome;
+    $_SESSION["email_usuario"] = $email;
+
+    echo "<script>alert('Informações atualizadas com sucesso!'); window.location='perfil.php';</script>";
     exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Meu Perfil - StockControl</title>
     <link rel="stylesheet" href="../css/perfil.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 </head>
+
 <body>
     <?php include 'nav.php'; ?>
 
     <main>
-        <div id="banner">
+        <section id="banner">
             <h1>Meu Perfil</h1>
             <p>Gerencie suas informações de usuário</p>
-        </div>
-        <div class="container-form">
-            <form method="POST">
-                <h3>Informações Iniciais</h3>
-    
-                <div>
-                    <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($usuario['nome']); ?>" required placeholder="Nome Completo">
-                </div>
-    
-                <div>
-                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" required placeholder="E-mail">
-                </div>
+        </section>
 
-                <h3>Criar Nova Senha</h3>
-    
-                <div>
-                    <input type="password" id="senha" name="senha" placeholder="Nova senha" placeholder="Senha Atual">
-                </div>
-    
-                <div>
-                    <input type="password" id="nova_senha" name="nova_senha" placeholder="Nova senha">
-                </div>
-    
+        <section class="container-form">
+            <form method="POST">
+                <h3>Informações Pessoais</h3>
+
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($usuario['nome_usuario']); ?>" required>
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email_usuario']); ?>" required>
+
+                <h3>Alterar Senha</h3>
+
+                <label for="senha_atual">Senha Atual</label>
+                <input type="password" id="senha_atual" name="senha_atual" placeholder="Digite sua senha atual">
+
+                <label for="nova_senha">Nova Senha</label>
+                <input type="password" id="nova_senha" name="nova_senha" placeholder="Digite sua nova senha">
+
                 <button type="submit">Salvar Alterações</button>
+                <button type="button" id="sair">Sair</button>
             </form>
-        </div>
+        </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-section">
-                <img src="../img/logo1.png" alt="Logo" class="footer-logo">
-            </div>
-            <div class="footer-section" id="footer1">
-                <h4>Sistema de Gerenciamento de Estoque</h4>
-                <p>Gerencie o estoque da loja StockControl de forma eficiente e prática. Usufrua de uma interface intuitiva e recursos poderosos para otimizar seu processo de gerenciamento.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Contato</h3>
-                <p><strong>Endereço:</strong> Rua Av. Monsenhor Theodomiro Lobo, 100 - Parque Res. Maria Elmira,
-                    Caçapava - SP, 12285-050<br>
-                    <strong>Email:</strong> <a href="mailto:stockcontrolcontact@gmail.com"
-                        target="_blank">stockcontrolcontact@gmail.com</a>
-                    <br>
-                    <strong>Telefone:</strong> (12) 1234-5678
-                </p>
-            </div>
-        </div>
-        <div class="bottom">
-            &copy; Sistema StockControl. Todos os direitos reservados.
-        </div>
-    </footer>
+    <?php include('footer.php') ?>
 </body>
+<script>
+    document.getElementById('sair').addEventListener('click', () => {
+        Swal.fire({
+            title: 'Deseja sair?',
+            text: 'Você será desconectado da sua conta.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, sair',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#DA020E',
+            cancelButtonColor: '#555'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redireciona apenas se o usuário confirmar
+                window.location.href = 'logout.php';
+            }
+        });
+    });
+</script>
+
+
 </html>
