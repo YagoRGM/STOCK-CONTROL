@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.titulo h1 {
+    font-size: 36px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.titulo h1 i {
+    font-size: 28px;
+    color: #DA020E;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 85%;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+thead {
+    background-color: #DA020E;
+    color: white;
+    font-size: 18px;
+}
+
+thead th {
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+tbody tr {
+    transition: all 0.2s ease-in-out;
+}
+
+tbody tr:hover {
+    background-color: #ffeaea;
+}
+
+tbody th {
+    border-bottom: 1px solid #ddd;
+    padding: 12px 15px;
+    font-weight: 400;
+    color: black;
+}
+
+.acoes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.botao {
+    text-decoration: none;
+    text-align: center;
+    border-radius: 20px;
+    padding: 6px 12px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+#editar {
+    background-color: rgb(37, 120, 255);
+}
+
+#editar:hover {
+    box-shadow: inset 0px 0px 35px 3px rgb(0, 33, 87);
+}
+
+#excluir {
+    background-color: red;
+}
+
+#excluir:hover {
+    box-shadow: inset 0px 0px 35px 3px rgb(81, 0, 0);
+}
+
+#adicionar_usuario {
+    margin-top: 30px;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    text-decoration: none;
+    padding: 10px;
+    width: 20%;
+    background-color: #b30000;
+    transition: 0.3s ease-in-out;
+}
+
+#adicionar_usuario:hover {
+    transform: translateY(-3px) scale(1.02);
+}

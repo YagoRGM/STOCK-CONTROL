@@ -28,7 +28,6 @@ if (!isset($_SESSION["id_usuario"])) {
     <?php include 'nav.php'; ?>
 
     <main>
-        <!-- Seção principal com banner -->
         <section class="sessao-hero">
             <div class="conteudo-hero">
                 <h1>Seja Bem-vindo ao Stock Control</h1>
@@ -36,10 +35,7 @@ if (!isset($_SESSION["id_usuario"])) {
             </div>
         </section>
 
-        <!-- Saudação -->
 
-
-        <!-- Cards de ações -->
         <section id="secao_operacoes">
             <div id="boas-vindas">
                 <p>Olá, <?php echo htmlspecialchars($nome_usuario) ?>! | <?php echo htmlspecialchars($tipo_usuario) ?></p>

@@ -19,33 +19,34 @@ main {
 }
 
 
-.titulo {
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-}
-
 .titulo h1 {
-    font-size: 36px;
+    font-size: 40px;
+    text-align: center;
     font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.titulo h1 i {
-    font-size: 28px;
-    color: #DA020E;
 }
 
 .form-produto {
+    padding: 30px;
     margin-top: 40px;
-    width: 50%;
+    width: 70%;
     border-radius: 20px;
     display: flex;
-    flex-direction: column;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.inputbox_foto {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputbox_foto img {
+    width: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 .form-header {
@@ -59,12 +60,20 @@ main {
     font-weight: 600;
 }
 
+.inputs {
+    padding: 50px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
 .inputbox {
-    margin-top: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
     display: flex;
     flex-direction: column;
+}
+
+.inputbox img {
+    width: 80%;
 }
 
 label {
@@ -81,6 +90,7 @@ input[type="file"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
+    color: red;
 }
 
 select {

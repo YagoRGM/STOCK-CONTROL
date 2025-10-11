@@ -2,15 +2,15 @@
 include('conexao.php');
 session_start();
 
-$id_usuario = $_SESSION["id_usuario"];
-$nome_usuario = $_SESSION["nome_usuario"];
-$email_usuario = $_SESSION["email_usuario"];
-$tipo_usuario = $_SESSION["tipo_usuario"];
-
 if (!isset($_SESSION["id_usuario"])) {
     header("Location: login.php");
     exit;
 }
+
+$stmt_produtos = $conexao->prepare('SELECT * FROM produtos');
+$stmt_produtos->execute();
+$result_produtos = $stmt_produtos->get_result();
+
 
 ?>
 
@@ -20,74 +20,57 @@ if (!isset($_SESSION["id_usuario"])) {
 <head>
     <meta charset="UTF-8">
     <title>Home - StockControl</title>
-    <link rel="stylesheet" href="../css/inicio.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/listar_produtos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <?php include 'nav.php'; ?>
 
     <main>
-        <!-- Seção principal com banner -->
-        <section class="sessao-hero">
-            <div class="conteudo-hero">
-                <h1>Seja Bem-vindo ao Stock Control</h1>
-                <a href="#secao_operacoes" id="btn-saiba-mais">Saiba mais</a>
-            </div>
-        </section>
-
-        <!-- Saudação -->
+        <div class="titulo">
+            <h1><i class="fas fa-boxes"></i> Listar Produtos</h1>
+            <p>Visualize, edite e gerencie todos os produtos disponíveis no sistema.</p>
+        </div>
 
 
-        <!-- Cards de ações -->
-        <section id="secao_operacoes">
-            <div id="boas-vindas">
-                <p>Olá, <?php echo htmlspecialchars($nome_usuario) ?>! | <?php echo htmlspecialchars($tipo_usuario) ?></p>
-            </div>
-            <div id="cards-container">
-                <a href="cadastro_produtos.php">
-                    <div class="card-item">
-                        <img src="../img/Plus.png" alt="Cadastrar Produtos">
-                        <h3>Cadastrar Produtos</h3>
+        <div class="pesquisa_produtos">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Pesquise aqui...">
+        </div>
+
+        <div class="produtos_container">
+            <?php if ($result_produtos->num_rows > 0): ?>
+                <?php while ($produto = $result_produtos->fetch_assoc()): ?>
+                    <?php $foto_produto = base64_encode($produto['imagem_produto']); ?>
+                    <div class="card_produto">
+
+                        <div class="imagem_produto">
+                            <img src="data:image;base64,<?php echo htmlspecialchars($foto_produto); ?>" alt="Imagem do produto">
+                        </div>
+
+                        <div class="titulo_produto">
+                            <h1><strong>Título:</strong> <?php echo htmlspecialchars($produto['nome_produto']); ?></h1>
+                        </div>
+
+                        <div class="info_produto">
+                            <p><strong>Descrição:</strong> <?php echo htmlspecialchars($produto['descricao_produto']); ?></p>
+                            <p><strong>Preço:</strong> R$<?php echo htmlspecialchars($produto['preco_produto']); ?></p>
+                            <p><strong>Quantidade:</strong> <?php echo htmlspecialchars($produto['quantidade_produto']); ?> unidades</p>
+                        </div>
+
+                        <div class="operacoes">
+                            <a href="editar_produto.php?id=<?php echo htmlspecialchars($produto['id_produto']); ?>" class="botao" id="editar">Editar</a>
+                            <a href="excluir_produto.php?id=<?php echo htmlspecialchars($produto['id_produto']); ?>" class="botao" id="excluir">Excluir</a>
+                        </div>
+
                     </div>
-                </a>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>Nenhum produto encontrado.</p>
+            <?php endif; ?>
+        </div>
 
-                <a href="listar_produtos.php">
-                    <div class="card-item">
-                        <img src="../img/Bulleted List.png" alt="Listar Produtos">
-                        <h3>Listar Produtos</h3>
-                    </div>
-                </a>
-
-                <a href="registrar_entrada.php">
-                    <div class="card-item">
-                        <img src="../img/Forward Button.png" alt="Registrar Entrada">
-                        <h3>Registrar Entrada</h3>
-                    </div>
-                </a>
-
-                <a href="registrar_saida.php">
-                    <div class="card-item">
-                        <img src="../img/Forward Button.png" alt="Registrar Saída">
-                        <h3>Registrar Saída</h3>
-                    </div>
-                </a>
-
-                <a href="movimentacoes.php">
-                    <div class="card-item">
-                        <img src="../img/In Transit.png" alt="Ver Movimentações">
-                        <h3>Ver Movimentações</h3>
-                    </div>
-                </a>
-
-                <a href="gerenciar_usuarios.php">
-                    <div class="card-item">
-                        <img src="../img/Users.png" alt="Gerenciar Usuários">
-                        <h3>Gerenciar Usuários</h3>
-                    </div>
-                </a>
-            </div>
-        </section>
     </main>
 
     <?php include('footer.php') ?>

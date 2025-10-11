@@ -43,7 +43,7 @@ foreach ($partes as $parte) {
 <body>
     <nav>
         <div class="logo">
-            <img src="../img/logo1.png" alt="Logo">
+            <a href="inicio.php"><img src="../img/logo1.png" alt="Logo"></a>
         </div>
 
         <div class="pesquisa">
@@ -53,7 +53,7 @@ foreach ($partes as $parte) {
 
         <ul class="navegacao">
             <li><a href="../php/inicio.php">Início</a></li>
-            <li><a href="#">Gerenciar camisas</a></li>
+            <li><a href="listar_produtos.php">Listar produtos</a></li>
             <li><a href="#">Movimentações</a></li>
             <li><a href="#">Usuários</a></li>
             <li><i class="fa-solid fa-moon" id="modo-noturno"></i></li>

@@ -66,10 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php include 'nav.php'; ?>
 
     <main>
-        <section id="banner">
-            <h1>Meu Perfil</h1>
-            <p>Gerencie suas informações de usuário</p>
-        </section>
+        <div class="titulo">
+            <h1><i class="fas fa-user-circle"></i> Meu Perfil</h1>
+            <p>Visualize e edite suas informações pessoais e preferências do sistema.</p>
+            <div class="linha"></div>
+        </div>
+
 
         <section class="container-form">
             <form method="POST">
