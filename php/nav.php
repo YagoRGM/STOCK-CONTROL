@@ -54,6 +54,7 @@ foreach ($partes as $parte) {
         <ul class="navegacao" id="menu-nav">
             <li><a href="../php/inicio.php">Início</a></li>
             <li><a href="listar_produtos.php">Listar produtos</a></li>
+            <li><a href="comentarios.php">Comentários</a></li>
             <li><a href="movimentacoes.php">Movimentações</a></li>
 
             <?php if ($_SESSION['tipo_usuario'] === 'Administrador'): ?>
