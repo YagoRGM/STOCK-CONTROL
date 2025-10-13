@@ -52,12 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Meu Perfil - StockControl</title>
     <link rel="stylesheet" href="../css/perfil.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <?php include 'nav.php'; ?>
 
@@ -112,15 +114,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             });
         });
 
-        <?php if($mensagem): ?>
-        Swal.fire({
-            title: '',
-            text: '<?php echo $mensagem; ?>',
-            icon: '<?php echo $tipo; ?>'
-        }).then(() => {
-            window.location.href = 'perfil.php';
-        });
+        <?php if ($mensagem): ?>
+            Swal.fire({
+                title: '',
+                text: '<?php echo $mensagem; ?>',
+                icon: '<?php echo $tipo; ?>'
+            }).then(() => {
+                window.location.href = 'perfil.php';
+            });
         <?php endif; ?>
     </script>
 </body>
+
 </html>

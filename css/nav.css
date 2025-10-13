@@ -92,3 +92,69 @@ nav .logo img {
         flex-wrap: wrap;
     }
 }
+
+.card_produto {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    transition: all 0.3s ease;
+    width: 350px;
+}
+
+.card_produto:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+.card_produto .imagem_produto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_produto .imagem_produto img {
+    width: 50%;
+}
+
+.card_produto .titulo_produto h1 {
+    font-size: 20px;
+}
+
+.card_produto .operacoes {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.botao {
+    text-decoration: none;
+    text-align: center;
+    border-radius: 20px;
+    padding: 5px;
+    width: 35%;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+#editar {
+    background-color: rgb(37, 120, 255);
+}
+
+#editar:hover {
+    box-shadow: inset 0px 0px 35px 3px rgb(0, 33, 87);
+}
+
+#excluir {
+    background-color: red;
+}
+
+#excluir:hover {
+    box-shadow: inset 0px 0px 35px 3px rgb(81, 0, 0);
+}

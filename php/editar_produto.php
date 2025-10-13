@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="inputbox">
-                    <button type="submit" class="btn-adicionar">Adicionar Produto</button>
+                    <button type="submit" class="btn-adicionar">Editar Produto</button>
                 </div>
             </div>
 

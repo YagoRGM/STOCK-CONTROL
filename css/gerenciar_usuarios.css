@@ -79,6 +79,7 @@ tbody th {
 .acoes {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 10px;
 }
 
@@ -91,6 +92,8 @@ tbody th {
     transition: 0.3s ease-in-out;
     font-weight: 500;
     font-size: 14px;
+    border: none;
+    cursor: pointer;
 }
 
 #editar {
