@@ -61,9 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <button type="submit">Entrar</button>
 
-            <p class="links-baixo">
+            <!-- <p class="links-baixo">
                 <a href="cadastro.php" class="opcoes">Cadastrar novo usuário</a>
-            </p>
+            </p> -->
 
         </form>
     </div>
