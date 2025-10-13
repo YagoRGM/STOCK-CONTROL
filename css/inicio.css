@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
     margin: 0;
@@ -8,120 +8,217 @@
     scroll-behavior: smooth;
 }
 
-/* ===========================
-   SEÇÃO HERO (BANNER)
-=========================== */
+/* ============================
+   SESSÃO HERO - CARROSSEL
+============================ */
 .sessao-hero {
     position: relative;
-    background-image: url('../img/Captura\ de\ tela\ 2025-10-07\ 111408.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 60vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    overflow: hidden;
+    color: white;
 }
 
-.sessao-hero::before {
-    content: "";
+.carrossel {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    z-index: 0;
+}
+
+.carrossel img {
+    position: absolute;
     width: 100%;
     height: 100%;
-    background-color: black;
-    opacity: 0.6;
-    z-index: 1;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 1.5s ease, transform 6s ease;
 }
 
+.carrossel img.ativo {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Texto central */
 .conteudo-hero {
     position: relative;
     z-index: 2;
-    color: white;
-    height: 150px;
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 40px 60px;
+    border-radius: 20px;
+    animation: fadeInUp 1.2s ease-out;
+    backdrop-filter: blur(6px);
 }
 
+.conteudo-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.conteudo-hero h1 span {
+    color: #ffcccc;
+}
+
+.conteudo-hero p {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    opacity: 0.95;
+}
+
+/* Botão "Saiba Mais" */
 #btn-saiba-mais {
-    border: 1px solid #ffffff;
-    width: 10%;
-    padding: 10px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    background: none;
-    border-radius: 0;
+    display: inline-block;
     margin-top: 20px;
-    border-radius: 10px;
+    background: #fff;
+    color: #DA020E;
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-weight: 600;
     text-decoration: none;
-    transition: 0.3s ease-in-out;
+    font-size: 16px;
+    border: 2px solid #fff;
+    transition: all 0.3s ease-in-out;
 }
 
 #btn-saiba-mais:hover {
-    background-color: red;
-    color: white;
-    box-shadow: 0 0 20px red;
-    border: 1px solid rgb(135, 0, 0);
+    background: #DA020E;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
-/* ===========================
-   SEÇÃO BOAS-VINDAS
-=========================== */
-#boas-vindas {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+/* Setas de navegação */
+.seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    width: 5%;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 3;
+    transition: all 0.3s ease;
 }
 
-#boas-vindas p {
-    font-size: 30px;
-    font-weight: 400;
+.seta:hover {
+    background: rgba(218, 2, 14, 0.8);
 }
 
-/* ===========================
-   SEÇÃO CARDS DE AÇÕES
-=========================== */
-#secao_operacoes {
+.seta-esquerda {
+    left: 25px;
+}
+
+.seta-direita {
+    right: 25px;
+}
+
+/* ============================
+   SEÇÃO OPERAÇÕES
+============================ */
+#secao-operacoes {
     background-color: #f5f5f5;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
-    height: 100vh;
+    gap: 30px;
+    padding: 80px 20px;
+    text-align: center;
 }
 
-
-#secao_operacoes a {
-    text-decoration: none;
+.boas-vindas p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #333;
 }
 
-#cards-container {
-    width: 70%;
+.cards-container {
     display: flex;
-    justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    width: 80%;
 }
 
 .card-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background: #DA020E;
     color: white;
+    border-radius: 10px;
+    padding: 25px 20px;
+    width: 260px;
     text-align: center;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    font-size: 20px;
-    width: 300px;
+}
+
+.card-item img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.card-item:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(218, 2, 14, 0.3);
+}
+
+/* ============================
+   ANIMAÇÕES / RESPONSIVIDADE
+============================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .conteudo-hero {
+        padding: 25px 30px;
+    }
+
+    .conteudo-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .conteudo-hero p {
+        font-size: 1.1rem;
+    }
+
+    .seta {
+        font-size: 2rem;
+        padding: 8px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .conteudo-hero h1 {
+        font-size: 1.7rem;
+    }
+
+    #btn-saiba-mais {
+        width: 80%;
+        font-size: 15px;
+    }
+
+    .card-item {
+        width: 90%;
+    }
 }
