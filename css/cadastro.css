@@ -34,11 +34,11 @@ a {
 /* Logo acima do form */
 .logo-container {
     position: absolute;
-    top: -80px;
+    top: -60px; 
     left: 50%;
     transform: translateX(-50%);
-    width: 140px;
-    height: 140px;
+    width: 130px; 
+    height: 130px;
 }
 
 .logo {
@@ -46,10 +46,9 @@ a {
     height: auto;
 }
 
-/* Formulário */
 form {
     background-color: #fff;
-    padding: 60px 40px 40px;
+    padding: 40px 40px 30px; 
     border-radius: 20px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     text-align: center;
@@ -59,7 +58,7 @@ form {
 .voltar {
     display: block;
     text-align: left;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduzido */
     color: #DA020E;
     font-weight: 600;
     font-size: 14px;
@@ -76,17 +75,25 @@ form {
 h2 {
     text-align: center;
     color: #DA020E;
-    margin-top: 8px;
-    margin-bottom: 25px;
+    margin-top: 0; /* Reduzido */
+    margin-bottom: 15px; /* Reduzido */
     font-size: 28px;
     font-weight: bold;
+}
+
+label {
+    font-weight: 600;
+    color: #DA020E;
+    display: block;
+    text-align: left;
+    margin-top: 8px; /* Reduzido */
 }
 
 input,
 select {
     width: 100%;
-    padding: 12px 15px;
-    margin-top: 5px;
+    padding: 5px 10px; 
+    margin-top: 4px; 
     border: 2px solid #DA020E;
     border-radius: 10px;
     font-size: 16px;
@@ -105,24 +112,16 @@ select:focus {
     box-shadow: 0 0 5px #DA020E;
 }
 
-label {
-    font-weight: 600;
-    color: #DA020E;
-    display: block;
-    text-align: left;
-    margin-top: 12px;
-}
-
 button {
     width: 100%;
     background-color: #DA020E;
     color: #fff;
     border: none;
-    padding: 14px;
-    margin-top: 22px;
+    padding: 12px; /* Altura reduzida */
+    margin-top: 15px; /* Espaço reduzido acima do botão */
     border-radius: 10px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     transition: 0.3s;
 }
@@ -134,7 +133,7 @@ button:hover {
 .links-baixo {
     display: flex;
     justify-content: space-between;
-    margin: 15px 0;
+    margin: 10px 0; /* Reduzido */
 }
 
 .links-inline a,
@@ -156,7 +155,7 @@ button:hover {
     font-size: 16px;
     display: block;
     text-align: left;
-    margin-top: 6px;
+    margin-top: 4px; /* Reduzido */
 }
 
 .erro {
@@ -170,10 +169,11 @@ button:hover {
 /* Mobile */
 @media (max-width: 500px) {
     form {
-        padding: 50px 20px 30px;
+        padding: 35px 20px 25px;
     }
     h2 {
         font-size: 22px;
+        margin-bottom: 12px;
     }
     input,
     select,
@@ -182,25 +182,31 @@ button:hover {
         padding: 10px 12px;
     }
     .logo-container {
-        width: 100px;
-        height: 100px;
-        top: -60px;
+        width: 80px;
+        height: 80px;
+        top: -50px;
     }
 }
 
 /* Tablets e desktops médios */
 @media (min-width: 501px) and (max-width: 800px) {
     form {
-        padding: 60px 30px 40px;
+        padding: 40px 25px 30px;
     }
     h2 {
         font-size: 24px;
+        margin-bottom: 15px;
     }
     input,
     select,
     button {
         font-size: 16px;
         padding: 12px 14px;
+    }
+    .logo-container {
+        width: 90px;
+        height: 90px;
+        top: -55px;
     }
 }
 
@@ -210,7 +216,7 @@ button:hover {
         max-width: 500px;
     }
     form {
-        padding: 70px 50px 50px;
+        padding: 50px 35px 35px;
     }
     h2 {
         font-size: 28px;
@@ -223,5 +229,10 @@ button:hover {
     button {
         font-size: 17px;
         padding: 14px 16px;
+    }
+    .logo-container {
+        width: 100px;
+        height: 100px;
+        top: -60px;
     }
 }

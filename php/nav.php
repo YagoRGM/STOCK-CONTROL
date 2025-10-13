@@ -54,8 +54,8 @@ foreach ($partes as $parte) {
         <ul class="navegacao">
             <li><a href="../php/inicio.php">Início</a></li>
             <li><a href="listar_produtos.php">Listar produtos</a></li>
-            <li><a href="#">Movimentações</a></li>
-            <li><a href="#">Usuários</a></li>
+            <li><a href="movimentacoes.php">Movimentações</a></li>
+            <li><a href="gerenciar_usuarios.php">Usuários</a></li>
             <li><i class="fa-solid fa-moon" id="modo-noturno"></i></li>
             <li><a href="perfil.php" id="perfil"><?php echo htmlspecialchars($iniciais); ?></a></li>
         </ul>

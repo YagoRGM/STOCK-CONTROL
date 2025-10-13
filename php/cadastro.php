@@ -8,9 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nome = trim($_POST["nome_digitado"]);
     $email = trim($_POST["email_digitado"]);
     $senha = password_hash($_POST["senha_digitado"], PASSWORD_DEFAULT);
-    $tipo = $_POST["tipo_digitado"] ?? "funcionario";
+    $tipo = $_POST["tipo_digitado"];
 
-    $sql = "INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO usuarios (nome_usuario, email_usuario, senha_usuario, tipo_usuario) VALUES (?, ?, ?, ?)";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("ssss", $nome, $email, $senha, $tipo);
 
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label>Tipo:</label>
             <select name="tipo_digitado">
                 <option value="funcionario">Funcionário</option>
-                <option value="admin">Administrador</option>
+                <option value="Administrador">Administrador</option>
             </select>
 
             <button type="submit">Cadastrar</button>

@@ -3,65 +3,61 @@ include('conexao.php');
 session_start();
 $id_usuario = $_SESSION['id_usuario'];
 
-// Verifica se o usuário está logado corretamente
 if (!isset($_SESSION["id_usuario"])) {
     header("Location: login.php");
     exit;
 }
 
-
-// Busca os dados atuais do usuário
 $stmt = $conexao->prepare("SELECT nome_usuario, email_usuario, senha_usuario FROM usuarios WHERE id_usuario = ?");
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
 $result = $stmt->get_result();
 $usuario = $result->fetch_assoc();
 
-// Atualização do perfil
+$mensagem = '';
+$tipo = '';
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nome = $_POST["nome"];
     $email = $_POST["email"];
     $senha_atual = $_POST["senha_atual"];
     $nova_senha = $_POST["nova_senha"];
 
-    // Atualiza nome e email sempre
     $update_query = "UPDATE usuarios SET nome_usuario = ?, email_usuario = ? WHERE id_usuario = ?";
     $update_stmt = $conexao->prepare($update_query);
     $update_stmt->bind_param("ssi", $nome, $email, $id_usuario);
     $update_stmt->execute();
 
-    // Se quiser alterar a senha
     if (!empty($senha_atual) && !empty($nova_senha)) {
         if (password_verify($senha_atual, $usuario["senha_usuario"])) {
             $nova_senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
             $update_senha = $conexao->prepare("UPDATE usuarios SET senha_usuario = ? WHERE id_usuario = ?");
             $update_senha->bind_param("si", $nova_senha_hash, $id_usuario);
             $update_senha->execute();
-            echo "<script>alert('Senha atualizada com sucesso!');</script>";
+            $mensagem = 'Informações e senha atualizadas com sucesso!';
+            $tipo = 'success';
         } else {
-            echo "<script>alert('Senha atual incorreta.');</script>";
+            $mensagem = 'Informações atualizadas, mas a senha atual está incorreta.';
+            $tipo = 'warning';
         }
+    } else {
+        $mensagem = 'Informações atualizadas com sucesso!';
+        $tipo = 'success';
     }
 
-    // 🔥 Atualiza as informações na sessão
     $_SESSION["nome_usuario"] = $nome;
     $_SESSION["email_usuario"] = $email;
-
-    echo "<script>alert('Informações atualizadas com sucesso!'); window.location='perfil.php';</script>";
-    exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <title>Meu Perfil - StockControl</title>
     <link rel="stylesheet" href="../css/perfil.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
     <?php include 'nav.php'; ?>
 
@@ -72,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="linha"></div>
         </div>
 
-
         <section class="container-form">
             <form method="POST">
                 <h3>Informações Pessoais</h3>
@@ -81,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($usuario['nome_usuario']); ?>" required>
 
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email_usuario']); ?>" required>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email_usuario']); ?>" readonly>
 
                 <h3>Alterar Senha</h3>
 
@@ -97,27 +92,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </section>
     </main>
 
-    <?php include('footer.php') ?>
-</body>
-<script>
-    document.getElementById('sair').addEventListener('click', () => {
-        Swal.fire({
-            title: 'Deseja sair?',
-            text: 'Você será desconectado da sua conta.',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Sim, sair',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#DA020E',
-            cancelButtonColor: '#555'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Redireciona apenas se o usuário confirmar
-                window.location.href = 'logout.php';
-            }
+    <?php include('footer.php'); ?>
+
+    <script>
+        document.getElementById('sair').addEventListener('click', () => {
+            Swal.fire({
+                title: 'Deseja sair?',
+                text: 'Você será desconectado da sua conta.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, sair',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#DA020E',
+                cancelButtonColor: '#555'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'logout.php';
+                }
+            });
         });
-    });
-</script>
 
-
+        <?php if($mensagem): ?>
+        Swal.fire({
+            title: '',
+            text: '<?php echo $mensagem; ?>',
+            icon: '<?php echo $tipo; ?>'
+        }).then(() => {
+            window.location.href = 'perfil.php';
+        });
+        <?php endif; ?>
+    </script>
+</body>
 </html>
