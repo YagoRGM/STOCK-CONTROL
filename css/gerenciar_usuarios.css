@@ -38,11 +38,19 @@ main {
     color: #DA020E;
 }
 
+/* CONTAINER SCROLL */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 30px;
+}
+
+/* TABELA */
 table {
     border-collapse: separate;
     border-spacing: 0;
-    width: 85%;
-    margin-top: 30px;
+    width: 100%;
+    min-width: 800px; /* força scroll em telas pequenas */
     background-color: white;
     border-radius: 15px;
     overflow: hidden;
@@ -69,11 +77,12 @@ tbody tr:hover {
     background-color: #ffeaea;
 }
 
-tbody th {
+tbody td, tbody th {
     border-bottom: 1px solid #ddd;
     padding: 12px 15px;
     font-weight: 400;
     color: black;
+    text-align: center;
 }
 
 .acoes {
@@ -126,4 +135,24 @@ tbody th {
 
 #adicionar_usuario:hover {
     transform: translateY(-3px) scale(1.02);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    main {
+        padding: 30px 15px;
+    }
+
+    table {
+        min-width: 600px;
+    }
+    #adicionar_usuario {
+    width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    table {
+        min-width: 500px;
+    }
 }

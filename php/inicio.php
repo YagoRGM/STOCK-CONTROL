@@ -57,14 +57,14 @@ if (!isset($_SESSION["id_usuario"])) {
 
                 <a href="registrar_entrada.php">
                     <div class="card-item">
-                        <img src="../img/Forward Button.png" alt="Registrar Entrada">
+                        <img src="../img/Entrada.png" alt="Registrar Entrada">
                         <h3>Registrar Entrada</h3>
                     </div>
                 </a>
 
                 <a href="registrar_saida.php">
                     <div class="card-item">
-                        <img src="../img/Forward Button.png" alt="Registrar Saída">
+                        <img src="../img/Saida.png" alt="Registrar Saída">
                         <h3>Registrar Saída</h3>
                     </div>
                 </a>
@@ -76,12 +76,15 @@ if (!isset($_SESSION["id_usuario"])) {
                     </div>
                 </a>
 
-                <a href="gerenciar_usuarios.php">
-                    <div class="card-item">
-                        <img src="../img/Users.png" alt="Gerenciar Usuários">
-                        <h3>Gerenciar Usuários</h3>
-                    </div>
-                </a>
+                <?php if ($tipo_usuario === 'Administrador'): ?>
+                    <a href="gerenciar_usuarios.php">
+                        <div class="card-item">
+                            <img src="../img/Users.png" alt="Gerenciar Usuários">
+                            <h3>Gerenciar Usuários</h3>
+                        </div>
+                    </a>
+                <?php endif; ?>
+
             </div>
         </section>
     </main>

@@ -27,17 +27,17 @@ a {
 .container {
     position: relative;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     text-align: center;
 }
 
 /* Logo acima do form */
 .logo-container {
     position: absolute;
-    top: -60px; 
+    top: -70px;
     left: 50%;
     transform: translateX(-50%);
-    width: 130px; 
+    width: 130px;
     height: 130px;
 }
 
@@ -48,9 +48,9 @@ a {
 
 form {
     background-color: #fff;
-    padding: 40px 40px 30px; 
+    padding: 50px 40px 40px;
     border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
     text-align: center;
     width: 100%;
 }
@@ -58,14 +58,14 @@ form {
 .voltar {
     display: block;
     text-align: left;
-    margin-bottom: 10px; /* Reduzido */
+    margin-bottom: 15px;
     color: #DA020E;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16px;
     transition: 0.3s;
 }
 .voltar i {
-    margin-right: 6px;
+    margin-right: 8px;
 }
 .voltar:hover {
     color: #b0020c;
@@ -75,9 +75,9 @@ form {
 h2 {
     text-align: center;
     color: #DA020E;
-    margin-top: 0; /* Reduzido */
-    margin-bottom: 15px; /* Reduzido */
-    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 32px;
     font-weight: bold;
 }
 
@@ -86,16 +86,17 @@ label {
     color: #DA020E;
     display: block;
     text-align: left;
-    margin-top: 8px; /* Reduzido */
+    margin-top: 12px;
+    font-size: 16px;
 }
 
 input,
 select {
     width: 100%;
-    padding: 5px 10px; 
-    margin-top: 4px; 
+    padding: 12px 15px;
+    margin-top: 6px;
     border: 2px solid #DA020E;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 16px;
     color: #DA020E;
     outline: none;
@@ -109,7 +110,7 @@ input::placeholder {
 
 input:focus,
 select:focus {
-    box-shadow: 0 0 5px #DA020E;
+    box-shadow: 0 0 6px #DA020E;
 }
 
 button {
@@ -117,11 +118,11 @@ button {
     background-color: #DA020E;
     color: #fff;
     border: none;
-    padding: 12px; /* Altura reduzida */
-    margin-top: 15px; /* Espaço reduzido acima do botão */
-    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     transition: 0.3s;
 }
@@ -133,7 +134,7 @@ button:hover {
 .links-baixo {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0; /* Reduzido */
+    margin: 15px 0;
 }
 
 .links-inline a,
@@ -152,15 +153,15 @@ button:hover {
 }
 
 .opcoes {
-    font-size: 16px;
+    font-size: 18px;
     display: block;
     text-align: left;
-    margin-top: 4px; /* Reduzido */
+    margin-top: 6px;
 }
 
 .erro {
     color: red;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     text-align: center;
 }
 
@@ -169,70 +170,78 @@ button:hover {
 /* Mobile */
 @media (max-width: 500px) {
     form {
-        padding: 35px 20px 25px;
+        padding: 50px 25px 40px;
     }
     h2 {
-        font-size: 22px;
-        margin-bottom: 12px;
+        font-size: 30px;
+        margin-bottom: 25px;
+    }
+    label {
+        font-size: 18px;
+        margin-top: 12px;
     }
     input,
     select,
     button {
-        font-size: 15px;
-        padding: 10px 12px;
+        font-size: 18px;
+        padding: 15px 16px;
     }
     .logo-container {
-        width: 80px;
-        height: 80px;
-        top: -50px;
+        width: 100px;
+        height: 100px;
+        top: -60px;
     }
 }
 
 /* Tablets e desktops médios */
 @media (min-width: 501px) and (max-width: 800px) {
     form {
-        padding: 40px 25px 30px;
+        padding: 60px 30px 45px;
     }
     h2 {
-        font-size: 24px;
-        margin-bottom: 15px;
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+    label {
+        font-size: 20px;
+        margin-top: 15px;
     }
     input,
     select,
     button {
-        font-size: 16px;
-        padding: 12px 14px;
+        font-size: 20px;
+        padding: 18px 20px;
     }
     .logo-container {
-        width: 90px;
-        height: 90px;
-        top: -55px;
+        width: 120px;
+        height: 120px;
+        top: -65px;
     }
 }
 
 /* Desktop grande */
 @media (min-width: 801px) {
     .container {
-        max-width: 500px;
+        max-width: 90%;
     }
     form {
-        padding: 50px 35px 35px;
+        padding: 70px 50px 60px;
     }
     h2 {
-        font-size: 28px;
+        font-size: 42px;
     }
     label {
-        font-size: 16px;
+        font-size: 22px;
     }
     input,
     select,
     button {
-        font-size: 17px;
-        padding: 14px 16px;
+        font-size: 22px;
+        padding: 20px 22px;
     }
     .logo-container {
-        width: 100px;
-        height: 100px;
-        top: -60px;
+        width: 140px;
+        height: 140px;
+        top: -75px;
     }
 }

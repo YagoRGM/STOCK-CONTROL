@@ -9,6 +9,12 @@ if (!isset($_SESSION["id_usuario"])) {
     exit;
 }
 
+// Bloqueia acesso de funcionários
+if ($_SESSION['tipo_usuario'] !== 'Administrador') {
+    header("Location: inicio.php");
+    exit;
+}
+
 $stmt_usuario = $conexao->prepare('SELECT * FROM usuarios');
 $stmt_usuario->execute();
 $result_usuario = $stmt_usuario->get_result();
@@ -34,7 +40,7 @@ $result_usuario = $stmt_usuario->get_result();
         </div>
 
         <!-- Mensagens via sessão -->
-        <?php if(isset($_SESSION['mensagem_sucesso'])): ?>
+        <?php if (isset($_SESSION['mensagem_sucesso'])): ?>
             <script>
                 Swal.fire({
                     icon: 'success',
@@ -46,7 +52,7 @@ $result_usuario = $stmt_usuario->get_result();
             <?php unset($_SESSION['mensagem_sucesso']); ?>
         <?php endif; ?>
 
-        <?php if(isset($_SESSION['mensagem_erro'])): ?>
+        <?php if (isset($_SESSION['mensagem_erro'])): ?>
             <script>
                 Swal.fire({
                     icon: 'error',
@@ -57,36 +63,37 @@ $result_usuario = $stmt_usuario->get_result();
             </script>
             <?php unset($_SESSION['mensagem_erro']); ?>
         <?php endif; ?>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Tipo</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <?php if ($result_usuario->num_rows > 0): ?>
-                <?php while ($usuario = $result_usuario->fetch_assoc()): ?>
-                    <tbody>
-                        <tr>
-                            <th><?php echo htmlspecialchars($usuario['id_usuario']) ?></th>
-                            <th><?php echo htmlspecialchars($usuario['nome_usuario']) ?></th>
-                            <th><?php echo htmlspecialchars($usuario['email_usuario']) ?></th>
-                            <th><?php echo htmlspecialchars($usuario['tipo_usuario']) ?></th>
-                            <th>
-                                <div class="acoes">
-                                    <button class="botao" id="editar" onclick="abrirModal(<?= $usuario['id_usuario'] ?>, '<?= addslashes($usuario['nome_usuario']) ?>', '<?= addslashes($usuario['email_usuario']) ?>', '<?= $usuario['tipo_usuario'] ?>')">Editar</button>
-                                    <a href="javascript:void(0)" class="botao" id="excluir" onclick="confirmarExclusao(<?php echo $usuario['id_usuario'] ?>)">Excluir</a>
-                                </div>
-                            </th>
-                        </tr>
-                    </tbody>
-                <?php endwhile; ?>
-            <?php endif; ?>
-        </table>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Tipo</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <?php if ($result_usuario->num_rows > 0): ?>
+                    <?php while ($usuario = $result_usuario->fetch_assoc()): ?>
+                        <tbody>
+                            <tr>
+                                <th><?php echo htmlspecialchars($usuario['id_usuario']) ?></th>
+                                <th><?php echo htmlspecialchars($usuario['nome_usuario']) ?></th>
+                                <th><?php echo htmlspecialchars($usuario['email_usuario']) ?></th>
+                                <th><?php echo htmlspecialchars($usuario['tipo_usuario']) ?></th>
+                                <th>
+                                    <div class="acoes">
+                                        <button class="botao" id="editar" onclick="abrirModal(<?= $usuario['id_usuario'] ?>, '<?= addslashes($usuario['nome_usuario']) ?>', '<?= addslashes($usuario['email_usuario']) ?>', '<?= $usuario['tipo_usuario'] ?>')">Editar</button>
+                                        <a href="javascript:void(0)" class="botao" id="excluir" onclick="confirmarExclusao(<?php echo $usuario['id_usuario'] ?>)">Excluir</a>
+                                    </div>
+                                </th>
+                            </tr>
+                        </tbody>
+                    <?php endwhile; ?>
+                <?php endif; ?>
+            </table>
+        </div>
 
         <!-- Botão para abrir modal de adicionar usuário -->
         <a href="#" id="adicionar_usuario">Adicionar Usuário</a>
@@ -169,16 +176,16 @@ $result_usuario = $stmt_usuario->get_result();
     <script>
         // Modal Editar
         function abrirModal(id, nome, email, tipo) {
-            const idLogado = <?= $_SESSION["id_usuario"] ?>; 
+            const idLogado = <?= $_SESSION["id_usuario"] ?>;
 
-            if(id === idLogado) {
+            if (id === idLogado) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Atenção!',
                     text: 'Vá para a tela de perfil se desejar alterar seus dados.',
                     confirmButtonColor: '#DA020E'
                 });
-                return; 
+                return;
             }
 
             document.getElementById('editar_usuario_id').value = id;
