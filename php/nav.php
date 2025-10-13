@@ -41,6 +41,12 @@ foreach ($partes as $parte) {
             <a href="inicio.php"><img src="../img/logo1.png" alt="Logo"></a>
         </div>
 
+        <div class="pesquisa" style="position: relative;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="pesquisa-nav" placeholder="Buscar produtos...">
+            <div id="sugestoes" class="sugestoes"></div>
+        </div>
+
         <div class="hamburger" id="hamburger">
             <i class="fa-solid fa-bars"></i>
         </div>
@@ -73,6 +79,28 @@ foreach ($partes as $parte) {
             document.body.classList.toggle("dark-mode");
             btnModo.classList.toggle("fa-sun");
             btnModo.classList.toggle("fa-moon");
+        });
+
+        document.getElementById('pesquisa-nav').addEventListener('input', async function() {
+            const termo = this.value.trim();
+            const sugestoes = document.getElementById('sugestoes');
+
+            if (termo.length === 0) {
+                sugestoes.innerHTML = '';
+                return;
+            }
+
+            const response = await fetch(`buscar_produtos.php?modo=nomes&pesquisa=${encodeURIComponent(termo)}`);
+            const data = await response.text();
+
+            sugestoes.innerHTML = data;
+
+            // Ao clicar na sugestão → vai pra listagem filtrada
+            sugestoes.querySelectorAll('div').forEach(div => {
+                div.addEventListener('click', () => {
+                    window.location.href = `listar_produtos.php?pesquisa=${encodeURIComponent(div.innerText)}`;
+                });
+            });
         });
     </script>
 
